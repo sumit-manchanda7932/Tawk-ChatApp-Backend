@@ -15,7 +15,11 @@ const cors = require("cors");
 dbConnect();
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:"*",
+    methods:["GET","PATCH","POST","DELETE","PUT"],
+    credentials:true,
+}));
 
 // Main routes
 app.use("/api/users", userRoutes);
@@ -53,9 +57,9 @@ const server = app.listen(process.env.SERVER_PORT, () => {
 });
 
 const io = require("socket.io")(server, {
-  pingTimeout: 60000,
-  cors: {
-    origin: "*",
+   cors: {
+    origin: '*',
+    methods: ["GET", "POST"],
   },
 });
 
