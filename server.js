@@ -49,8 +49,9 @@ if (process.env.NODE_ENV === "production") {
 // Error handling routes
 app.use(routeNotFound);
 app.use(errorHandler);
-
-const server = app.listen(process.env.SERVER_PORT, () => {
+const http = require("http");
+const server = http.createServer(app);
+server.listen(process.env.SERVER_PORT, () => {
   console.log(
     colors.green(`\nServer is UP on PORT ${process.env.SERVER_PORT}`)
   ); 
